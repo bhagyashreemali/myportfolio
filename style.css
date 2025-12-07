@@ -29,6 +29,7 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     background-color: var(--bg-light);
+    overflow-x: hidden; /* Prevent horizontal scroll on mobile */
 }
 
 a {
@@ -111,13 +112,22 @@ nav a:hover {
     color: var(--accent-color);
 }
 
+/* Mobile Menu Button (Hidden on Desktop) */
+.mobile-menu-btn {
+    display: none;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    z-index: 1001;
+}
+
 /* =========================================
    3. HERO SECTION
    ========================================= */
 .hero-section {
     display: flex;
     align-items: center;
-    justify-content: center; /* Centering fix */
+    justify-content: center;
     min-height: 90vh;
     background: linear-gradient(135deg, #fff 50%, #eef2f3 50%);
 }
@@ -148,10 +158,23 @@ nav a:hover {
     margin-bottom: 10px;
 }
 
+/* Typing Cursor Effect */
 .role {
     font-size: 1.8rem;
     color: var(--text-light);
     margin-bottom: 25px;
+    min-height: 1.8rem; /* Prevents layout shift */
+}
+
+.role::after {
+    content: '|';
+    animation: blink 1s infinite;
+    color: var(--accent-color);
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
 }
 
 .summary {
@@ -304,7 +327,7 @@ nav a:hover {
     color: var(--text-light);
     margin-bottom: 20px;
     font-size: 0.95rem;
-    flex-grow: 1; /* Pushes button to bottom */
+    flex-grow: 1;
 }
 
 .project-link {
@@ -340,7 +363,7 @@ nav a:hover {
     background-color: #ddd;
     top: 0;
     bottom: 0;
-    left: 20px; /* Aligned left for easier responsiveness */
+    left: 20px;
 }
 
 .timeline-item {
@@ -474,24 +497,60 @@ footer {
 }
 
 /* =========================================
-   9. RESPONSIVE MEDIA QUERIES
+   9. SCROLL REVEAL ANIMATIONS
+   ========================================= */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================
+   10. RESPONSIVE MEDIA QUERIES
    ========================================= */
 @media (max-width: 768px) {
-    
-    /* Header */
+    /* Header & Navigation */
+    .mobile-menu-btn {
+        display: block; /* Show hamburger on mobile */
+    }
+
     nav {
-        display: none; /* Simple hide for now, or use a hamburger menu in future */
+        display: block;
+        position: fixed;
+        top: 0;
+        right: -100%; /* Hide off-screen initially */
+        height: 100vh;
+        width: 70%;
+        background: var(--bg-white);
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        padding-top: 80px;
+        transition: right 0.4s ease;
+    }
+
+    nav.active {
+        right: 0; /* Slide in */
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
     }
     
     header .container {
-        justify-content: center;
+        justify-content: space-between;
     }
 
-    /* Hero */
+    /* Hero Section */
     .hero-section {
         background: var(--bg-white);
         text-align: center;
-        padding-top: 100px; /* Offset for sticky header */
+        padding-top: 100px;
     }
 
     .hero-content {
@@ -515,66 +574,5 @@ footer {
     /* Certifications */
     .certifications ul {
         grid-template-columns: 1fr;
-    }
-}/* --- ADD THIS TO THE BOTTOM OF YOUR STYLE.CSS --- */
-
-/* Mobile Menu Styles (Toggled by JS) */
-.mobile-menu-btn {
-    display: none;
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    cursor: pointer;
-    z-index: 1001;
-}
-
-/* Scroll Animation Classes */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Typing Cursor */
-.role::after {
-    content: '|';
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-@media (max-width: 768px) {
-    .mobile-menu-btn {
-        display: block; /* Show hamburger on mobile */
-    }
-
-    nav {
-        display: block; /* Override the previous display: none */
-        position: fixed;
-        top: 0;
-        right: -100%; /* Hide off-screen initially */
-        height: 100vh;
-        width: 70%;
-        background: var(--bg-white);
-        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
-        padding-top: 80px;
-        transition: right 0.4s ease;
-    }
-
-    nav.active {
-        right: 0; /* Slide in */
-    }
-
-    nav ul {
-        flex-direction: column;
-        align-items: center;
-        gap: 40px;
     }
 }
