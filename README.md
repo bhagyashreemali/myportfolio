@@ -96,9 +96,7 @@ To view or modify this project locally, follow these steps:
 **Bhagyashree Mali** *B.E. Artificial Intelligence & Machine Learning Student*
 
 * **Email:** BHAGYASHREEMALI1624@gmail.com
-* **LinkedIn:** www.linkedin.com/in/
-bhagyashree-mali
-
+* **LinkedIn:** www.linkedin.com/in/bhagyashree-mali
 * **GitHub:** https://github.com/bhagyashreemali
 
 ---
