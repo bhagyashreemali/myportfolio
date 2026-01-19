@@ -1,5 +1,6 @@
+// Minor update for PR demonstration
 document.addEventListener('DOMContentLoaded', () => {
-    
+
     // =========================================
     // 1. DYNAMIC MOBILE MENU CREATION
     // =========================================
@@ -51,13 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function typeEffect() {
         const currentRole = roles[roleIndex];
-        
+
         if (isDeleting) {
             roleElement.textContent = currentRole.substring(0, charIndex - 1);
             charIndex--;
             typeSpeed = 50; // Faster when deleting
         } else {
-            roleElement.textContent = currentRole.substring(0, charIndex + 1);
+            roleElement.textContent = currentRole.substring(0, charIndex + 1) + '|';
             charIndex++;
             typeSpeed = 100; // Normal typing speed
         }
@@ -117,4 +118,4 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', revealOnScroll);
     // Trigger once on load
     revealOnScroll();
-});
+}); 
